@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace FormArreglosMultidimensionales_2025_I
@@ -8,6 +8,7 @@ namespace FormArreglosMultidimensionales_2025_I
     {
         bool changeOperando= false;
         
+
         Multidimensional m1;
         Multidimensional m2;
         Multidimensional m3;
@@ -21,20 +22,59 @@ namespace FormArreglosMultidimensionales_2025_I
 
         private void btnAgregarOperando_Click(object sender, EventArgs e)
         {
-            if (!changeOperando)
+            try
             {
-                m1 = Multidimensional.Read(txtbDisplay.Text);
+                if ( txtbDisplay.Text == ""  )
+                {
+                    throw new ApplicationException("El campo display está vacío");
 
-                lbOperando1.Text = m1.ToString();
-                changeOperando = true;
+                }
+                errorProvider1.Clear();
+
+                if (!changeOperando)
+                {
+                    m1 = Multidimensional.Read(txtbDisplay.Text);
+
+                    lbOperando1.Text = m1.ToString();
+                    changeOperando = true;
+                }
+                else
+                {
+                    m2 = Multidimensional.Read(txtbDisplay.Text);
+                    lbOperando2.Text = m2.ToString();
+                    changeOperando = false;
+                }
             }
-            else
+            catch (ApplicationException ex)
             {
-                m2 = Multidimensional.Read(txtbDisplay.Text);
-                lbOperando2.Text = m2.ToString();
-                changeOperando = false;
+                errorProvider1.SetError(txtbDisplay, ex.Message);
+                
             }
            
         }
+
+        private void btnSum_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (m1 == null  || m2 == null )
+                {
+                    throw new ApplicationException("Ingresar un arreglo" +
+                        " de 2 dimensiones en el display");
+                }
+
+                m3 = m1 + m2;
+                lbResultado.Text = m3.ToString();
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtbDisplay = new System.Windows.Forms.TextBox();
             this.btnSum = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
@@ -42,6 +43,8 @@
             this.rdbRad = new System.Windows.Forms.RadioButton();
             this.btnSin = new System.Windows.Forms.Button();
             this.btnAgregarOperando = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbDisplay
@@ -60,6 +63,7 @@
             this.btnSum.TabIndex = 1;
             this.btnSum.Text = "+";
             this.btnSum.UseVisualStyleBackColor = true;
+            this.btnSum.Click += new System.EventHandler(this.btnSum_Click);
             // 
             // btnMinus
             // 
@@ -178,6 +182,10 @@
             this.btnAgregarOperando.UseVisualStyleBackColor = true;
             this.btnAgregarOperando.Click += new System.EventHandler(this.btnAgregarOperando_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +207,7 @@
             this.Controls.Add(this.txtbDisplay);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,6 +229,7 @@
         private System.Windows.Forms.RadioButton rdbRad;
         private System.Windows.Forms.Button btnSin;
         private System.Windows.Forms.Button btnAgregarOperando;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
